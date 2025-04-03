@@ -1,20 +1,20 @@
-const { getCategoriaDB, addCategoriaDB, updateCategoriaDB,
-    deleteCategoriaDB, getCategoriaPorCodigoDB } = require('../useCases/categoriaUseCases');
+const { getProdutoDB, addProdutoDB, updateProdutoDB,
+    deleteProdutoDB, getProdutoPorCodigoDB } = require('../useCases/produtosUseCases');
 
 
-const getCategoria = async (request, response) => {
-    await getCategoriaDB()
+const getProduto = async (request, response) => {
+    await getProdutoDB()
         .then(data => response.status(200).json(data))
         .catch(err => response.status(400).json({
             status: 'error',
-            message: 'Erro ao consultar as categorias: ' + err
+            message: 'Erro ao consultar os produtos: ' + err
         }));
 }
 
-const addCategoria = async (request, response) => {
-    await addCategoriaDB(request.body)
+const addProduto = async (request, response) => {
+    await addProdutoDB(request.body)
         .then(data => response.status(201).json({
-            "status" : "success", "message" : "Categoria criada",
+            "status" : "success", "message" : "Produto criado",
             "objeto": data
         }))
         .catch(err => response.status(400).json({
@@ -23,10 +23,10 @@ const addCategoria = async (request, response) => {
         }))
 }
 
-const updateCategoria = async (request, response) => {
-    await updateCategoriaDB(request.body)
+const updateProduto = async (request, response) => {
+    await updateProdutoDB(request.body)
         .then(data => response.status(200).json({
-            status: "success", message: "Categoria alterada",
+            status: "success", message: "Produto alterado",
             objeto: data
         }))
         .catch(err => response.status(400).json({
@@ -35,8 +35,8 @@ const updateCategoria = async (request, response) => {
         }));
 }
 
-const deleteCategoria = async (request, response) => {
-    await deleteCategoriaDB(request.params.codigo)
+const deleteProduto = async (request, response) => {
+    await deleteProdutoDB(request.params.codigo)
         .then(data => response.status(200).json({
             status: "success", message: data
         }))
@@ -46,8 +46,8 @@ const deleteCategoria = async (request, response) => {
         }));
 }
 
-const getCategoriaPorCodigo = async (request, response) => {
-    await getCategoriaPorCodigoDB(request.params.codigo)
+const getProdutoPorCodigo = async (request, response) => {
+    await getProdutoPorCodigoDB(request.params.codigo)
         .then(data => response.status(200).json(data))
         .catch(err => response.status(400).json({
             status: 'error',
@@ -58,6 +58,5 @@ const getCategoriaPorCodigo = async (request, response) => {
 
 
 module.exports = {
-    getCategoria, addCategoria, updateCategoria, 
-    deleteCategoria, getCategoriaPorCodigo
+    getProduto, addProduto, getProdutoPorCodigo, deleteProduto, updateProduto
 }
